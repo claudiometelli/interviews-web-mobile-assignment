@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for assignment app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claudiometelli/interviews-web-mobile-assignment.git"
+  },
+  "author": "Claudio Metelli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/claudiometelli/interviews-web-mobile-assignment/issues"
+  },
+  "homepage": "https://github.com/claudiometelli/interviews-web-mobile-assignment#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
