@@ -1,11 +1,11 @@
 import express from "express";
 import { posts } from "../database/dbReader.js";
+import { comments } from "../database/dbReader.js";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    console.log(posts);
-    // res.json(db.data.posts);
+    res.json(posts.data);
 });
 
 router.get("/:id", (req, res) => {
@@ -15,6 +15,16 @@ router.get("/:id", (req, res) => {
         res.status(404);
         res.send("Post not Found");
     }
+    res.json(result);
+});
+
+router.get("/:id/comments", (req, res) => {
+    const postId = req.params.id;
+    if (posts.data.filter((post) => post.id == postId).length === 0) {
+        res.status(404);
+        res.send("Post not Found");
+    }
+    const result = comments.data.filter((comment) => comment.postId == postId);
     res.json(result);
 });
 

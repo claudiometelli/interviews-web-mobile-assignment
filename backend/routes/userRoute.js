@@ -1,5 +1,5 @@
 import express from "express";
-import db from "./../database/dbReader.js";
+import { users } from "./../database/dbReader.js";
 
 const router = express.Router();
 
