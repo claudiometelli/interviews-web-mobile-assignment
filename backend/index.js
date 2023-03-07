@@ -2,9 +2,19 @@
 import express from "express";
 import http from "http";
 
+import userRoute from "./routes/userRoute.js";
+import postRoute from "./routes/postRoute.js";
+
 const PORT = 3000;
 const app = express();
 const server = http.createServer(app);
+
+// Utility Middlewares
+app.use(express.json());
+
+// Routes
+app.use("/users", userRoute);
+app.use("/posts", postRoute);
 
 server.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
