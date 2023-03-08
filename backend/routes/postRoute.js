@@ -30,6 +30,17 @@ router.get("/:id/comments", (req, res) => {
 router.post("/", (req, res) => {
     const postTitle = req.body.title;
     const postBody = req.body.body;
+    const postUser = req.body.user;
+    const maxId = posts.data.length ? Math.max(...posts.data.map((post) => post.id)) : 0;
+    const post = {
+        userId: postUser,
+        id: maxId + 1,
+        title: postTitle,
+        body: postBody,
+    };
+    posts.data.push(post);
+    posts.write();
+    res.json(post);
 });
 
 export default router;
