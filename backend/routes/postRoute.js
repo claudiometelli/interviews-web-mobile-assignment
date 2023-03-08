@@ -1,6 +1,5 @@
 import express from "express";
-import { posts } from "../database/dbReader.js";
-import { comments } from "../database/dbReader.js";
+import { posts, comments } from "../database/dbReader.js";
 
 const router = express.Router();
 
@@ -26,6 +25,11 @@ router.get("/:id/comments", (req, res) => {
     }
     const result = comments.data.filter((comment) => comment.postId == postId);
     res.json(result);
+});
+
+router.post("/", (req, res) => {
+    const postTitle = req.body.title;
+    const postBody = req.body.body;
 });
 
 export default router;
