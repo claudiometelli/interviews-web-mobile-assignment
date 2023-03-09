@@ -6,7 +6,7 @@ import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
 import commentsRoute from "./routes/commentsRoute.js";
 
-const PORT = 3000;
+const PORT = 8080;
 const app = express();
 const server = http.createServer(app);
 
@@ -17,6 +17,8 @@ app.use(express.json());
 app.use("/users", userRoute);
 app.use("/posts", postRoute);
 app.use("/comments", commentsRoute);
+
+app.all("*", (req, res) => res.status(405).send("Method not allowed"));
 
 server.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
