@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import Navbar from "../components/Navbar";
-import PostService from "../services/PostService";
+import PostBoard from "./PostBoard";
 
 const Home = () => {
-    const [post, setPost] = useState({});
-
-    useEffect(() => {
-        PostService.getPostById(2).then((res) => {
-            setPost(res.data);
-        });
-    }, []);
-
     return (
         <Container fluid>
             <Navbar />
@@ -24,11 +16,7 @@ const Home = () => {
                         Colonna di Sinistra
                     </Col>
                     <Col style={{ backgroundColor: "lightgrey" }}>
-                        <Container>
-                            <h2>{post.title}</h2>
-                            <p>User: {post.userId}</p>
-                            <p>{post.body}</p>
-                        </Container>
+                        <PostBoard />
                     </Col>
                     <Col xs lg="2" style={{ backgroundColor: "green" }}>
                         Colonna di Destra
