@@ -1,10 +1,11 @@
 import express from "express";
+import config from "../config/config.js";
 import { users, posts, comments } from "../database/dbReader.js";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.json(posts.data);
+    res.json(posts.data.slice(0, config.maxPostsQuery));
 });
 
 router.get("/:id", (req, res) => {

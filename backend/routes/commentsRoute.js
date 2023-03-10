@@ -1,4 +1,6 @@
 import express from "express";
+
+import config from "../config/config.js";
 import { posts, comments } from "../database/dbReader.js";
 
 const router = express.Router();
@@ -12,7 +14,7 @@ router.get("/", (req, res) => {
         }
         result = result.filter((comment) => comment.postId == postId);
     }
-    if (result.length > 100) result = result.slice(0, 100);
+    if (result.length > config.maxCommentsQuery) result = result.slice(0, config.maxCommentsQuery);
     res.json(result);
 });
 

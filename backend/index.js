@@ -3,11 +3,13 @@ import express from "express";
 import http from "http";
 import cors from "cors";
 
+import config from "./config/config.js";
+
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
 import commentsRoute from "./routes/commentsRoute.js";
 
-const PORT = 8080;
+const PORT = config.PORT;
 const app = express();
 const server = http.createServer(app);
 
