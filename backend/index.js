@@ -13,9 +13,13 @@ const PORT = config.PORT;
 const app = express();
 const server = http.createServer(app);
 
+const corsOptions = {
+    origin: "http://localhost:3000",
+};
+
 // Utility Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Routes
 app.use("/users", userRoute);

@@ -8,14 +8,29 @@ const PostBoard = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        PostService.getPosts().then((res) => {
-            setPosts(
-                res.data.map((post) => <Post key={post.id} user={post.userId} title={post.title} body={post.body} />)
-            );
-        });
+        const updatePosts = (posts) => {
+            setPosts(posts);
+        };
+        PostService.getPosts()
+            .then((res) => {
+                return res.json();
+            })
+            .then((jsonRes) => {
+                updatePosts(jsonRes);
+            });
     }, []);
 
-    return <Container>{posts}</Container>;
+    //  {posts.map((post) => (
+    //      <Post key={post.id} title={post.title} body={post.body} userId={post.userId} />
+    //  ))}
+
+    return (
+        <Container>
+            {posts.map((post) => (
+                <Post key={post.id} title={post.title} body={post.body} userId={post.userId} />
+            ))}
+        </Container>
+    );
 };
 
 export default PostBoard;

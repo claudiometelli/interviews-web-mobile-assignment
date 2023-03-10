@@ -1,6 +1,7 @@
 const config = {
     PORT: 8080,
-    maxPostsQuery: 30,
+    maxUsersQuery: 15,
+    maxPostsQuery: 20,
     maxCommentsQuery: 30,
 };
 
