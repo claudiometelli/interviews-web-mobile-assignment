@@ -1,6 +1,7 @@
 // Using import, not require, because of lowdb (https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c#how-can-i-move-my-commonjs-project-to-esm)
 import express from "express";
 import http from "http";
+import cors from "cors";
 
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
@@ -12,6 +13,7 @@ const server = http.createServer(app);
 
 // Utility Middlewares
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/users", userRoute);

@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
 import Navbar from "../components/Navbar";
+import PostService from "../services/PostService";
 
 const Home = () => {
+    const [post, setPost] = useState({});
+
+    useEffect(() => {
+        PostService.getPostById(2).then((res) => {
+            setPost(res.data);
+        });
+    }, []);
+
     return (
         <Container fluid>
             <Navbar />
@@ -17,25 +25,9 @@ const Home = () => {
                     </Col>
                     <Col style={{ backgroundColor: "lightgrey" }}>
                         <Container>
-                            <h2>temporibus sit alias delectus eligendi possimus magni</h2>
-                            <p>
-                                quo deleniti praesentium dicta non quod\naut est molestias\nmolestias et officia quis
-                                nihil\nitaque dolorem quia
-                            </p>
-                        </Container>
-                        <Container>
-                            <h2>temporibus sit alias delectus eligendi possimus magni</h2>
-                            <p>
-                                quo deleniti praesentium dicta non quod\naut est molestias\nmolestias et officia quis
-                                nihil\nitaque dolorem quia
-                            </p>
-                        </Container>
-                        <Container>
-                            <h2>temporibus sit alias delectus eligendi possimus magni</h2>
-                            <p>
-                                quo deleniti praesentium dicta non quod\naut est molestias\nmolestias et officia quis
-                                nihil\nitaque dolorem quia
-                            </p>
+                            <h2>{post.title}</h2>
+                            <p>User: {post.userId}</p>
+                            <p>{post.body}</p>
                         </Container>
                     </Col>
                     <Col xs lg="2" style={{ backgroundColor: "green" }}>

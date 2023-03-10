@@ -4,10 +4,8 @@ const endpoints = {
     getPosts: `${serverUrl}/posts`,
     getPostById: `${serverUrl}/posts/:id`,
     getCommentsByPostId: `${serverUrl}/posts/:id/comments`,
-    getComments
-    getGame: `${serverUrl}/games/:id`,
-    getGameStatus: `${serverUrl}/games/status`,
-    connectGame: `${serverUrl}/games/connect`,
+    getComments: `${serverUrl}/comments`,
+    getCommentsByQueryPostId: `${serverUrl}/comments?postId=:id`,
 };
 
 export default endpoints;
