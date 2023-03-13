@@ -11,18 +11,10 @@ const PostBoard = () => {
         const updatePosts = (posts) => {
             setPosts(posts);
         };
-        PostService.getPosts()
-            .then((res) => {
-                return res.json();
-            })
-            .then((jsonRes) => {
-                updatePosts(jsonRes);
-            });
+        PostService.getPosts().then((res) => {
+            updatePosts(res.data);
+        });
     }, []);
-
-    //  {posts.map((post) => (
-    //      <Post key={post.id} title={post.title} body={post.body} userId={post.userId} />
-    //  ))}
 
     return (
         <Container>

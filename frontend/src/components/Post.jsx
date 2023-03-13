@@ -10,15 +10,10 @@ const Post = (props) => {
         const updateUser = (user) => {
             setUser(user);
         };
-        UserService.getUserById(props.userId)
-            .then((res) => {
-                return res.json();
-            })
-            .then((jsonRes) => {
-                updateUser(jsonRes);
-            });
-        //.catch((error) => console.error(error));
-    }, []);
+        UserService.getUserById(props.userId).then((res) => {
+            updateUser(res.data);
+        });
+    }, [props.userId]);
 
     return (
         <Container>

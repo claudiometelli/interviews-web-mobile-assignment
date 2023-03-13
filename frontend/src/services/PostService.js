@@ -1,8 +1,9 @@
+import axios from "axios";
 import endpoints from "../config/endpoints";
 
 class PostService {
     getPosts = () => {
-        return fetch(endpoints.getPosts, {
+        return axios(endpoints.getPosts, {
             method: "GET",
             mode: "cors",
             headers: { "content-type": "application/json" },
@@ -10,7 +11,7 @@ class PostService {
     };
 
     getPostById = (postId) => {
-        return fetch(endpoints.getPostById.replace(":id", postId), {
+        return axios(endpoints.getPostById.replace(":id", postId), {
             method: "GET",
             mode: "cors",
             headers: { "content-type": "application/json" },
