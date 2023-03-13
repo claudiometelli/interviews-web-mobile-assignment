@@ -5,7 +5,19 @@ import { users, posts, comments } from "../database/dbReader.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.json(posts.data.slice(0, config.maxPostsQuery));
+    const randomPosts = req.query.randomPosts === "true" ? true : false;
+    let result = [];
+    if (randomPosts) {
+        const randoms = [];
+        while (randoms.length < Math.min(posts.data.length, config.maxUsersQuery)) {
+            const nextEl = Math.floor(Math.random() * posts.data.length);
+            if (!randoms.includes(nextEl)) randoms.push(nextEl);
+        }
+        result = randoms.map((randomIndex) => posts.data[randomIndex]);
+    } else {
+        result = posts.data.slice(0, config.maxPostsQuery);
+    }
+    res.json(result);
 });
 
 router.get("/:id", (req, res) => {
