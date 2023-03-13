@@ -4,7 +4,7 @@ import endpoints from "../config/endpoints";
 
 class UserService {
     getUsers = () => {
-        return fetch(endpoints.getUsers);
+        return axios.get(endpoints.getUsers);
     };
 
     getUserById = (userId) => {
