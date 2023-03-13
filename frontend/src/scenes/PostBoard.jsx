@@ -11,7 +11,7 @@ const PostBoard = () => {
         const updatePosts = (posts) => {
             setPosts(posts);
         };
-        PostService.getPosts().then((res) => {
+        PostService.getRandomPosts().then((res) => {
             updatePosts(res.data);
         });
     }, []);

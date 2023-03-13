@@ -2,10 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import Navbar from "../components/Navbar";
 import PostBoard from "./PostBoard";
 
+//post button sta in piedi ma nemmeno lui sa
 const Home = () => {
     return (
         <Container fluid>
@@ -30,6 +32,9 @@ const Home = () => {
                     <Col style={{ backgroundColor: "cyan" }}>Colonna 3</Col>
                 </Row>
             </Container>
+            <Button id="postButton" className="align-items-center">
+                <i className="fa fa-plus"></i>
+            </Button>
         </Container>
     );
 };

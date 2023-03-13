@@ -40,7 +40,7 @@ const MyNavbar = () => {
                     <Nav className="me-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown title="Sign In" id="users-dropdown">
                             {users.map((user) => (
                                 <NavDropdown.Item key={user.id}>
                                     <Container className="d-grid gap-2">

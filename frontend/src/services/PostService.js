@@ -10,6 +10,14 @@ class PostService {
         });
     };
 
+    getRandomPosts = () => {
+        return axios(endpoints.getRandomPosts, {
+            method: "GET",
+            mode: "cors",
+            headers: { "content-type": "application/json" },
+        });
+    };
+
     getPostById = (postId) => {
         return axios(endpoints.getPostById.replace(":id", postId), {
             method: "GET",
