@@ -1,4 +1,5 @@
 import express from "express";
+import { body, validationResult } from "express-validator";
 import config from "../config/config.js";
 import { users, posts, comments } from "../database/dbReader.js";
 
@@ -38,24 +39,34 @@ router.get("/:id/comments", (req, res) => {
     res.json(result);
 });
 
-router.post("/", (req, res) => {
-    const postTitle = req.body.title;
-    const postBody = req.body.body;
-    const postUser = req.body.userId;
-    if (users.data.filter((user) => user.id == postUser).length === 0) {
-        return res.status(404).send("User not Found");
+router.post(
+    "/",
+    body("title").notEmpty().isString(),
+    body("body").notEmpty().isString(),
+    body("userId").isInt(),
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).send("Bad request hahah");
+        }
+        const postTitle = req.body.title;
+        const postBody = req.body.body;
+        const postUser = req.body.userId;
+        if (users.data.filter((user) => user.id == postUser).length === 0) {
+            return res.status(404).send("User not Found");
+        }
+        const maxId = posts.data.length ? Math.max(...posts.data.map((post) => post.id)) : 0;
+        const post = {
+            userId: postUser,
+            id: maxId + 1,
+            title: postTitle,
+            body: postBody,
+        };
+        posts.data.push(post);
+        posts.write();
+        res.status(201).send("Post succesfully created");
     }
-    const maxId = posts.data.length ? Math.max(...posts.data.map((post) => post.id)) : 0;
-    const post = {
-        userId: postUser,
-        id: maxId + 1,
-        title: postTitle,
-        body: postBody,
-    };
-    posts.data.push(post);
-    posts.write();
-    res.status(201).send("Post succesfully created");
-});
+);
 
 router.put("/:id", (req, res) => {
     const postId = req.params.id;
