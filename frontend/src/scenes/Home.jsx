@@ -13,7 +13,11 @@ import PostBoard from "./PostBoard";
 const Home = () => {
     const [showAddPostComponent, setShowAddPostComponent] = useState(false);
     const handlePost = () => {
-        setShowAddPostComponent(!showAddPostComponent);
+        setShowAddPostComponent(true);
+    };
+
+    const closeAddPostComponent = () => {
+        setShowAddPostComponent(false);
     };
 
     return (
@@ -25,7 +29,7 @@ const Home = () => {
                         Colonna di Sinistra
                     </Col>
                     <Col style={{ backgroundColor: "lightgrey" }}>
-                        {showAddPostComponent ? <AddPost /> : null}
+                        {showAddPostComponent ? <AddPost close={closeAddPostComponent} /> : null}
                         <PostBoard />
                     </Col>
                     <Col xs lg="2" style={{ backgroundColor: "green" }}>

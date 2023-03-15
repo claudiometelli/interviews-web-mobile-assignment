@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import CloseButton from "react-bootstrap/CloseButton";
@@ -8,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import AuthService from "./../services/AuthService";
 import PostService from "./../services/PostService";
 
-const AddPost = () => {
+const AddPost = (props) => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [showTitleError, setShowTitleError] = useState(false);
@@ -23,6 +24,11 @@ const AddPost = () => {
     const handleBodyChange = (evt) => {
         evt.preventDefault();
         setBody(evt.target.value);
+    };
+
+    const handleCloseButton = (evt) => {
+        evt.preventDefault();
+        props.close();
     };
 
     const checkErrors = () => {
@@ -83,8 +89,8 @@ const AddPost = () => {
      */
     return (
         <Container>
-            <Container>
-                <CloseButton />
+            <Container className="d-flex justify-content-end close-button">
+                <CloseButton onClick={handleCloseButton} />
             </Container>
             <Form noValidate onSubmit={handleSubmit}>
                 <Form.Group controlId="titleGroup" as={Col} md="6">
