@@ -7,19 +7,21 @@ import Post from "../components/Post";
 const PostBoard = () => {
     const [posts, setPosts] = useState([]);
 
+    const deletePost = (postId) => {
+        const postIndex = posts.findIndex((post) => post.id === postId);
+        if (postIndex !== -1) posts.splice(postIndex, 1);
+    };
+
     useEffect(() => {
-        const updatePosts = (posts) => {
-            setPosts(posts);
-        };
         PostService.getRandomPosts().then((res) => {
-            updatePosts(res.data);
+            setPosts(res.data);
         });
     }, []);
 
     return (
         <Container>
             {posts.map((post) => (
-                <Post key={post.id} title={post.title} body={post.body} userId={post.userId} />
+                <Post key={post.id} title={post.title} body={post.body} userId={post.userId} delete={deletePost} />
             ))}
         </Container>
     );

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import CloseButton from "react-bootstrap/CloseButton";
@@ -89,7 +88,7 @@ const AddPost = (props) => {
      */
     return (
         <Container>
-            <Container className="d-flex justify-content-end close-button">
+            <Container className="d-flex justify-content-end close-button pt-2">
                 <CloseButton onClick={handleCloseButton} />
             </Container>
             <Form noValidate onSubmit={handleSubmit}>
@@ -115,6 +114,7 @@ const AddPost = (props) => {
                 <Button variant="primary" type="submit">
                     Post!
                 </Button>
+                <hr className="rounded"></hr>
             </Form>
         </Container>
     );

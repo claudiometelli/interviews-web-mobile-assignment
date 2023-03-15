@@ -38,6 +38,14 @@ class PostService {
             headers: { "content-type": "application/json" },
         });
     };
+
+    deletePost = () => {
+        return axios(endpoints.deletePost, {
+            method: "DELETE",
+            mode: "cors",
+            headers: { "content-type": "application/json" },
+        });
+    };
 }
 
 const service = new PostService();

@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     let result = [];
     if (randomPosts) {
         const randoms = [];
-        while (randoms.length < Math.min(posts.data.length, config.maxUsersQuery)) {
+        while (randoms.length < Math.min(posts.data.length, config.maxPostsQuery)) {
             const nextEl = Math.floor(Math.random() * posts.data.length);
             if (!randoms.includes(nextEl)) randoms.push(nextEl);
         }
@@ -47,7 +47,7 @@ router.post(
     (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).send("Bad request hahah");
+            return res.status(400).send("Bad request");
         }
         const postTitle = req.body.title;
         const postBody = req.body.body;

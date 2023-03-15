@@ -15,8 +15,9 @@ body {
     color: #dc3545;
 }
 
-.close-button {
-    padding-top: 1%;
+hr.rounded {
+    border-top: 5px solid rgb(144, 144, 144);
+    border-radius: 5px;
 }
 
 #postButton {

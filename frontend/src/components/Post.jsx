@@ -1,25 +1,68 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 
+import AuthService from "./../services/AuthService";
+import PostService from "./../services/PostService";
 import UserService from "./../services/UserService";
 
+const selfDropdownTag = "SELF";
+const otherDropdownTag = "OTHER";
+
 const Post = (props) => {
-    const [user, setUser] = useState({});
+    const [postUser, setPostUser] = useState({});
+    const [showDropdown, setShowDropdown] = useState("");
+
+    const SelfPostDropdown = () => {
+        return (
+            <Dropdown>
+                <Dropdown.Toggle variant="outline-secondary" size="sm" />
+                <Dropdown.Menu>
+                    <Dropdown.Item as="button" onClick={handleDelete}>
+                        Delete
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => console.log("Una bella busta di patatine rustiche")}>
+                        Boost
+                    </Dropdown.Item>
+                    <Dropdown.Item>Altre diavolerie...</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        );
+    };
+
+    const OtherPostDropdown = () => {
+        return (
+            <Dropdown>
+                <Dropdown.Toggle variant="outline-secondary" size="sm" />
+                <Dropdown.Menu>
+                    <Dropdown.Item>Signal</Dropdown.Item>
+                    <Dropdown.Item>Altre diavolerie...</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        );
+    };
+
+    const handleDelete = (evt) => {
+        evt.preventDefault();
+        PostService.deletePost().then(() => {});
+    };
 
     useEffect(() => {
-        const updateUser = (user) => {
-            setUser(user);
-        };
+        const user = AuthService.getUserProfile();
         UserService.getUserById(props.userId).then((res) => {
-            updateUser(res.data);
+            setPostUser(res.data);
+            if (user && res.data.id === user.id) {
+                setShowDropdown(selfDropdownTag);
+            } else {
+                setShowDropdown(otherDropdownTag);
+            }
         });
     }, [props.userId]);
+
     /**
- * 
+    * 
         <Card>
             <Card.Body>
                 <Card.Title>Card Title</Card.Title>
@@ -28,9 +71,10 @@ const Post = (props) => {
                 </Card.Text>
             </Card.Body>
         </Card>
- */
+    */
+
     return (
-        <Container>
+        <Container className="mt-2">
             <Row>
                 <Col md={11}>
                     <Row>
@@ -40,20 +84,16 @@ const Post = (props) => {
                     </Row>
                     <Row>
                         <Col>
-                            <h5>by {`${user.username}`}</h5>
+                            <h5>by {`${postUser.username}`}</h5>
                         </Col>
                     </Row>
                 </Col>
                 <Col md="auto">
-                    <Dropdown>
-                        <Dropdown.Toggle variant="outline-secondary" size="sm" />
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item>Delete</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    {showDropdown === selfDropdownTag ? (
+                        <SelfPostDropdown />
+                    ) : showDropdown === otherDropdownTag ? (
+                        <OtherPostDropdown />
+                    ) : null}
                 </Col>
             </Row>
             <Row>
@@ -61,6 +101,7 @@ const Post = (props) => {
                     <p className="post-body">{props.body}</p>
                 </Col>
             </Row>
+            <hr className="rounded"></hr>
         </Container>
     );
 };
