@@ -25,6 +25,19 @@ class PostService {
             headers: { "content-type": "application/json" },
         });
     };
+
+    postPost = (title, body, userId) => {
+        return axios(endpoints.postPost, {
+            method: "POST",
+            mode: "cors",
+            data: {
+                title: title,
+                body: body,
+                userId: userId,
+            },
+            headers: { "content-type": "application/json" },
+        });
+    };
 }
 
 const service = new PostService();

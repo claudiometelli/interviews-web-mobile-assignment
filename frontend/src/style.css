@@ -11,6 +11,9 @@ body {
     font-weight: normal;
 }
 
+.post-error-text {
+    color: #dc3545;
+}
 #postButton {
     position: fixed;
     height: 85px;

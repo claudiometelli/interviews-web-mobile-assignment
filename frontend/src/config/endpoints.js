@@ -4,6 +4,7 @@ const endpoints = {
     getUsers: `${serverUrl}/users`,
     getUserById: `${serverUrl}/users/:id`,
     getPosts: `${serverUrl}/posts`,
+    postPost: `${serverUrl}/posts`,
     getRandomPosts: `${serverUrl}/posts?randomPosts=true`,
     getPostById: `${serverUrl}/posts/:id`,
     getCommentsByPostId: `${serverUrl}/posts/:id/comments`,
