@@ -16,6 +16,11 @@ const Login = () => {
         setSignedInUser(user);
     };
 
+    const handleLogout = () => {
+        AuthService.logout();
+        setSignedInUser();
+    };
+
     useEffect(() => {
         const actualUser = AuthService.getUserProfile();
         setSignedInUser(actualUser);
@@ -38,6 +43,11 @@ const Login = () => {
                         >{`${user.id} - ${user.username}`}</Button>
                     </Row>
                 ))}
+                <Row>
+                    <Button className="m-2" variant="outline-danger" onClick={handleLogout}>
+                        Logout
+                    </Button>
+                </Row>
             </Container>
         </Container>
     );
