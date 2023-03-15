@@ -11,7 +11,8 @@ import PostBoard from "./PostBoard";
 //post button sta in piedi ma nemmeno lui sa come
 const Home = () => {
     const [showAddPostComponent, setShowAddPostComponent] = useState(false);
-    const handlePost = () => {
+
+    const openAddPostComponent = () => {
         setShowAddPostComponent(true);
     };
 
@@ -43,7 +44,7 @@ const Home = () => {
                     <Col style={{ backgroundColor: "cyan" }}>Colonna 3</Col>
                 </Row>
             </Container>
-            <Button id="postButton" className="align-items-center" onClick={handlePost}>
+            <Button id="postButton" className="align-items-center" onClick={openAddPostComponent}>
                 <i className="fa fa-plus"></i>
             </Button>
         </Container>

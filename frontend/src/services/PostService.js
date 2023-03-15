@@ -39,8 +39,8 @@ class PostService {
         });
     };
 
-    deletePost = () => {
-        return axios(endpoints.deletePost, {
+    deletePost = (postId) => {
+        return axios(endpoints.deletePostById.replace(":id", postId), {
             method: "DELETE",
             mode: "cors",
             headers: { "content-type": "application/json" },

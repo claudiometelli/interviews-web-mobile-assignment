@@ -23,7 +23,7 @@ const Post = (props) => {
                     <Dropdown.Item as="button" onClick={handleDelete}>
                         Delete
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => console.log("Una bella busta di patatine rustiche")}>
+                    <Dropdown.Item onClick={() => console.log("Una bel pacchetto di patatine rustiche, grazie.")}>
                         Boost
                     </Dropdown.Item>
                     <Dropdown.Item>Altre diavolerie...</Dropdown.Item>
@@ -46,7 +46,9 @@ const Post = (props) => {
 
     const handleDelete = (evt) => {
         evt.preventDefault();
-        PostService.deletePost().then(() => {});
+        PostService.deletePost(props.postId).then(() => {
+            props.deletePost(props.postId);
+        });
     };
 
     useEffect(() => {

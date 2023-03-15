@@ -8,8 +8,7 @@ const PostBoard = () => {
     const [posts, setPosts] = useState([]);
 
     const deletePost = (postId) => {
-        const postIndex = posts.findIndex((post) => post.id === postId);
-        if (postIndex !== -1) posts.splice(postIndex, 1);
+        setPosts(posts.filter((post) => post.id !== postId));
     };
 
     useEffect(() => {
@@ -21,7 +20,14 @@ const PostBoard = () => {
     return (
         <Container>
             {posts.map((post) => (
-                <Post key={post.id} title={post.title} body={post.body} userId={post.userId} delete={deletePost} />
+                <Post
+                    key={post.id}
+                    postId={post.id}
+                    title={post.title}
+                    body={post.body}
+                    userId={post.userId}
+                    deletePost={deletePost}
+                />
             ))}
         </Container>
     );
