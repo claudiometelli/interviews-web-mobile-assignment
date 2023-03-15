@@ -10,7 +10,11 @@ const MyNavbar = (props) => {
 
     useEffect(() => {
         const user = AuthService.getUserProfile();
-        if (user) setSignedInUser(user);
+        if (user) {
+            setSignedInUser(user);
+        } else {
+            setSignedInUser({});
+        }
     }, [props.signedInUser]);
 
     return (

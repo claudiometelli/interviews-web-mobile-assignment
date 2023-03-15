@@ -3,6 +3,10 @@ class AuthService {
         localStorage.setItem("user", JSON.stringify(user));
     };
 
+    logout = () => {
+        localStorage.removeItem("user");
+    };
+
     getUserProfile = () => {
         const user = localStorage.getItem("user");
         return user != null ? JSON.parse(user) : undefined;
