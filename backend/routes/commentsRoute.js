@@ -1,10 +1,33 @@
+/**
+ * @author Claudio Metelli
+ *
+ * For more info about this API: https://jsonplaceholder.typicode.com/
+ */
 import express from "express";
 
 import config from "../config/config.js";
 import { posts, comments } from "../database/dbReader.js";
 
+/**
+ * {
+ *      id: int,
+ *      name: string,
+ *      email: email-string,
+ *      body: string,
+ *      postId: int
+ * }
+ */
 const router = express.Router();
 
+/**
+ * GET request on /comments
+ * always takes a maximum of <config.maxCommentsQuery> from db and returns
+ *
+ * query parameters:
+ * postId: filter by post
+ *
+ * @return {Array} a list of comments inside res object
+ */
 router.get("/", (req, res) => {
     const postId = req.query.postId;
     let result = comments.data;
