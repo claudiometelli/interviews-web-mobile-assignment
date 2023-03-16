@@ -49,7 +49,11 @@ const ModifyPost = (props) => {
                 setBody(res.body);
                 PostService.modifyPost(props.postId, res.title, res.body)
                     .then(() => console.log("MODIFIED"))
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        if (error.status.code === 400) console.error("The format of your request is wrong");
+                        if (error.status.code === 404)
+                            console.error("The post you are trying to delete doesn't exist.");
+                    });
             })
             .catch((errors) => {
                 if (errors.title) setShowTitleError(true);

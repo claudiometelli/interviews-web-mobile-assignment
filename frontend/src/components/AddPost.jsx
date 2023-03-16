@@ -52,7 +52,10 @@ const AddPost = (props) => {
                 setBody("");
                 PostService.postPost(res.title, res.body, res.userId)
                     .then((res) => props.addPost(res.data))
-                    .catch((error) => console.error(error));
+                    .catch((error) => {
+                        if (error.status.code === 400) console.error("The format of your request is wrong");
+                        if (error.status.code === 404) console.error("The user who created the post doesn't exist.");
+                    });
             })
             .catch((errors) => {
                 if (errors.title) setShowTitleError(true);

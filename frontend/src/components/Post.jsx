@@ -22,9 +22,13 @@ const Post = (props) => {
 
     const handleDelete = (evt) => {
         evt.preventDefault();
-        PostService.deletePost(props.postId).then(() => {
-            props.deletePost(props.postId);
-        });
+        PostService.deletePost(props.postId)
+            .then(() => {
+                props.deletePost(props.postId);
+            })
+            .catch((error) => {
+                if (error.status.code === 404) console.error("The post you are trying to delete doesn't exist.");
+            });
     };
 
     useEffect(() => {
