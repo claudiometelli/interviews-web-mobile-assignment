@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import CloseButton from "react-bootstrap/CloseButton";
 import Form from "react-bootstrap/Form";
 
 import PostService from "./../services/PostService";
@@ -21,6 +22,11 @@ const ModifyPost = (props) => {
     const handleBodyChange = (evt) => {
         evt.preventDefault();
         setBody(evt.target.value);
+    };
+
+    const handleCloseButton = (evt) => {
+        evt.preventDefault();
+        props.close();
     };
 
     const checkErrors = () => {
@@ -59,6 +65,11 @@ const ModifyPost = (props) => {
     return (
         <Container className="mt-2">
             <Row>
+                <Col>
+                    <Container className="d-flex justify-content-end close-button pt-2">
+                        <CloseButton onClick={handleCloseButton} />
+                    </Container>
+                </Col>
                 <Col md={11}>
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group controlId="titleGroup" as={Col} className="md-6">

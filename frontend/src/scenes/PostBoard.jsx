@@ -11,6 +11,15 @@ const PostBoard = () => {
     const [posts, setPosts] = useState([]);
     const [showAddPostComponent, setShowAddPostComponent] = useState(false);
 
+    const closeModifyPostComponent = () => {
+        setPosts(
+            posts.map((post) => {
+                post.modify = false;
+                return post;
+            })
+        );
+    };
+
     const openAddPostComponent = () => {
         setShowAddPostComponent(true);
     };
@@ -61,6 +70,7 @@ const PostBoard = () => {
                             title={post.title}
                             body={post.body}
                             userId={post.userId}
+                            close={closeModifyPostComponent}
                         />
                     );
                 } else {
