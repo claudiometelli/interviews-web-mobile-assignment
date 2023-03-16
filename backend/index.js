@@ -15,6 +15,8 @@ const server = http.createServer(app);
 
 const corsOptions = {
     origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    optionsSuccessStatus: 204,
 };
 
 // Utility Middlewares

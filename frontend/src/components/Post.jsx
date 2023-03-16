@@ -15,11 +15,38 @@ const Post = (props) => {
     const [postUser, setPostUser] = useState({});
     const [showDropdown, setShowDropdown] = useState("");
 
+    const handleModify = (evt) => {
+        evt.preventDefault();
+        props.modifyPost(props.postId);
+    };
+
+    const handleDelete = (evt) => {
+        evt.preventDefault();
+        PostService.deletePost(props.postId).then(() => {
+            props.deletePost(props.postId);
+        });
+    };
+
+    useEffect(() => {
+        const user = AuthService.getUserProfile();
+        UserService.getUserById(props.userId).then((res) => {
+            setPostUser(res.data);
+            if (user && res.data.id === user.id) {
+                setShowDropdown(selfDropdownTag);
+            } else {
+                setShowDropdown(otherDropdownTag);
+            }
+        });
+    }, [props.userId]);
+
     const SelfPostDropdown = () => {
         return (
             <Dropdown>
                 <Dropdown.Toggle variant="outline-secondary" size="sm" />
                 <Dropdown.Menu>
+                    <Dropdown.Item as="button" onClick={handleModify}>
+                        Modify
+                    </Dropdown.Item>
                     <Dropdown.Item as="button" onClick={handleDelete}>
                         Delete
                     </Dropdown.Item>
@@ -43,37 +70,6 @@ const Post = (props) => {
             </Dropdown>
         );
     };
-
-    const handleDelete = (evt) => {
-        evt.preventDefault();
-        PostService.deletePost(props.postId).then(() => {
-            props.deletePost(props.postId);
-        });
-    };
-
-    useEffect(() => {
-        const user = AuthService.getUserProfile();
-        UserService.getUserById(props.userId).then((res) => {
-            setPostUser(res.data);
-            if (user && res.data.id === user.id) {
-                setShowDropdown(selfDropdownTag);
-            } else {
-                setShowDropdown(otherDropdownTag);
-            }
-        });
-    }, [props.userId]);
-
-    /**
-    * 
-        <Card>
-            <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                </Card.Text>
-            </Card.Body>
-        </Card>
-    */
 
     return (
         <Container className="mt-2">

@@ -64,11 +64,15 @@ router.post(
         };
         posts.data.push(post);
         posts.write();
-        res.status(201).send("Post succesfully created");
+        res.status(201).json(post);
     }
 );
 
-router.put("/:id", (req, res) => {
+router.put("/:id", body("title").notEmpty().isString(), body("body").notEmpty().isString(), (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).send("Bad request");
+    }
     const postId = req.params.id;
     const postTitle = req.body.title;
     const postBody = req.body.body;

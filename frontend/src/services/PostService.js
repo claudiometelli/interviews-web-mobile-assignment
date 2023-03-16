@@ -39,6 +39,19 @@ class PostService {
         });
     };
 
+    modifyPost = (postId, title, body) => {
+        console.log(postId);
+        return axios(endpoints.modifyPostById.replace(":id", postId), {
+            method: "PUT",
+            mode: "cors",
+            data: {
+                title: title,
+                body: body,
+            },
+            headers: { "content-type": "application/json" },
+        });
+    };
+
     deletePost = (postId) => {
         return axios(endpoints.deletePostById.replace(":id", postId), {
             method: "DELETE",

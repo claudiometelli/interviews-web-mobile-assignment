@@ -8,6 +8,7 @@ const endpoints = {
     getRandomPosts: `${serverUrl}/posts?randomPosts=true`,
     getPostById: `${serverUrl}/posts/:id`,
     deletePostById: `${serverUrl}/posts/:id`,
+    modifyPostById: `${serverUrl}/posts/:id`,
     getCommentsByPostId: `${serverUrl}/posts/:id/comments`,
     getComments: `${serverUrl}/comments`,
     getCommentsByQueryPostId: `${serverUrl}/comments?postId=:id`,
