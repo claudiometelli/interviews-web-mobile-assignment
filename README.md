@@ -102,4 +102,14 @@ The requirements for this challenge are the exact same requirements of the Front
 
 # How to run
 
-...
+This project is divided into two parts:
+
+-   ### Backend server with node and express.js (backend folder):
+
+> To run this server, you will need node.js. In the `package.json` file you will find every `npm package` i have used. You can install that with `npm` command, and then run server with the command `node index.js`, or `npm run dev`, if you want to run in developer mode. With this command, when you save, server will restart automatically.
+
+-   ### Frontend server with React (frontend folder):
+
+> To run this server, you will need node.js and `npm packages` like you did previously. You can start the server with the command `npm start`.
+
+Commands need to be run in their rispective folders.
