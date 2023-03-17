@@ -1,3 +1,6 @@
+/**
+ * @author Claudio Metelli
+ */
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -8,6 +11,18 @@ import Form from "react-bootstrap/Form";
 import AuthService from "./../services/AuthService";
 import PostService from "./../services/PostService";
 
+/**
+ * A component built to create posts.
+ * You need be logged in and to have title and body field not empty,
+ * otherwise you get an error on the screen.
+ * When an error is found, the rispective show<Title,Body,Log>Error variable is updated and it shows the error.
+ * If there are no errors, you can see the post on the screen in scenes/PostBoard, using the props.addPostFunction
+ *
+ * @param {*} props {
+ *                      close: a callback function from scenes/PostBoard called when you close this component
+ *                      addPost: a callback function from scenes/PostBoard called to show your new post
+ *                  }
+ */
 const AddPost = (props) => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -64,8 +79,8 @@ const AddPost = (props) => {
             });
     };
 
-    //TODO update using validating on react-bootstrap: https://react-bootstrap.github.io/forms/validation/
-    //try to add login check at them, old code:
+    // TODO update using validating on react-bootstrap: https://react-bootstrap.github.io/forms/validation/
+    // try to add login check at them, old code:
     /**
      *  <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group controlId="titleGroup" as={Col} md="6">
@@ -88,8 +103,6 @@ const AddPost = (props) => {
                 Post!
             </Button>
         </Form>
-
-        My login check now is very bad, i know
      */
     return (
         <Container>

@@ -8,6 +8,23 @@ import Form from "react-bootstrap/Form";
 
 import PostService from "./../services/PostService";
 
+/**
+ * A component built to modify posts.
+ * You need be the author of the post to modify it,
+ * otherwise you won't get that options in the dropdown menu in components/Post.
+ * Title and Body are transformed in input-text and input-textarea with their initial values.
+ * To update your post Title and Body cannot be empty.
+ * When an error is found, the rispective show<Title,Body>Error variable is updated and it shows the error.
+ * If there are no errors, you can see the post on the screen in scenes/PostBoard, using the props.addPostFunction
+ *
+ * @param {*} props {
+ *                      postId: the id of the post
+ *                      title: title of the post
+ *                      body: body of the post
+ *                      userId: the id of the user who created the post
+ *                      close: a callback function from scenes/PostBoard called when you close this component
+ *                  }
+ */
 const ModifyPost = (props) => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -44,7 +61,6 @@ const ModifyPost = (props) => {
         setShowBodyError(false);
         checkErrors()
             .then((res) => {
-                console.log("NO ERRORS");
                 setTitle(res.title);
                 setBody(res.body);
                 PostService.modifyPost(props.postId, res.title, res.body)

@@ -1,3 +1,6 @@
+/**
+ * @author Claudio Metelli
+ */
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -7,6 +10,12 @@ import Post from "../components/Post";
 import AddPost from "../components/AddPost";
 import ModifyPost from "../components/ModifyPost";
 
+/**
+ * A Board where all the posts component are rendered.
+ * It represents a list of components/Post.
+ * It is also responsible for showing or not showing the components/ModifyPost and components/AddPost,
+ * and for their updating in the list.
+ */
 const PostBoard = () => {
     const [posts, setPosts] = useState([]);
     const [showAddPostComponent, setShowAddPostComponent] = useState(false);

@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+/**
+ * @author Claudio Metelli
+ */
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,8 +9,10 @@ import Col from "react-bootstrap/Col";
 import Navbar from "../components/Navbar";
 import PostBoard from "./PostBoard";
 
-//post button sta in piedi ma nemmeno lui sa come
-const Home = (props) => {
+/**
+ * The home page where posts are rendered
+ */
+const Home = () => {
     return (
         <Container fluid>
             <Navbar />

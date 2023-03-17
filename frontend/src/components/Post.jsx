@@ -1,3 +1,6 @@
+/**
+ * @author Claudio Metelli
+ */
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,9 +11,23 @@ import AuthService from "./../services/AuthService";
 import PostService from "./../services/PostService";
 import UserService from "./../services/UserService";
 
+// these tag are used to recognize user's posts, so you can show proper dropdown menu with proper actions.
 const selfDropdownTag = "SELF";
 const otherDropdownTag = "OTHER";
 
+/**
+ * A component which represents the post and its data
+ * You can do different actions if you are the author of the post or if you are not
+ *
+ * @param {*} props {
+ *                      postId: the id of the post
+ *                      title: title of the post
+ *                      body: body of the post
+ *                      userId: the id of the user who created the post
+ *                      modifyPost: a callback function to update the post if you want to modify it
+ *                      deletePost: a callback function to delete the post if you want to delete it
+ *                  }
+ */
 const Post = (props) => {
     const [postUser, setPostUser] = useState({});
     const [showDropdown, setShowDropdown] = useState("");
@@ -33,16 +50,22 @@ const Post = (props) => {
 
     useEffect(() => {
         const user = AuthService.getUserProfile();
-        UserService.getUserById(props.userId).then((res) => {
-            setPostUser(res.data);
-            if (user && res.data.id === user.id) {
-                setShowDropdown(selfDropdownTag);
-            } else {
-                setShowDropdown(otherDropdownTag);
-            }
-        });
+        UserService.getUserById(props.userId)
+            .then((res) => {
+                setPostUser(res.data);
+                // choose what type of dropdown to show, if you are the user or you are not the user
+                if (user && res.data.id === user.id) {
+                    setShowDropdown(selfDropdownTag);
+                } else {
+                    setShowDropdown(otherDropdownTag);
+                }
+            })
+            .catch((error) => {
+                if (error.status.code === 404) console.error("The user is not found");
+            });
     }, [props.userId]);
 
+    // dropdown to show if you are the author of the post
     const SelfPostDropdown = () => {
         return (
             <Dropdown>
@@ -63,6 +86,7 @@ const Post = (props) => {
         );
     };
 
+    // dropdown to show if you are not the author of the post
     const OtherPostDropdown = () => {
         return (
             <Dropdown>

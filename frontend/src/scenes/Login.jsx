@@ -1,3 +1,6 @@
+/**
+ * @author Claudio Metelli
+ */
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -7,9 +10,14 @@ import AuthService from "./../services/AuthService";
 import UserService from "./../services/UserService";
 import Navbar from "../components/Navbar";
 
+/**
+ * A fake login page where you can login with a list of buttons, each associated with a user.
+ * You can also logout.
+ * See services/AuthService for more details
+ */
 const Login = () => {
-    const [signedInUser, setSignedInUser] = useState({});
     const [users, setUsers] = useState([]);
+    const [signedInUser, setSignedInUser] = useState({});
 
     const handleLogin = (user) => {
         AuthService.login(user);
